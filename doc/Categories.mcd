@@ -1,0 +1,4 @@
+PEUT AVOIR, 01 TASKS , 0N CATEGORIE: nb. max. categorie.
+CATEGORIE: id, name, status
+
+TASKS: id, title, completion, category, status
