@@ -2,76 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+
 class CategoryController extends Controller
 {
     /**
-     * Create a new controller instance.
+     * Liste des catégories
      *
      * @return void
      */
     public function list()
     {
-        $categoriesList = [
-            1 => [
-              'id' => 1,
-              'name' => 'Chemin vers O\'clock',
-              'status' => 1
-            ],
-            2 => [
-              'id' => 2,
-              'name' => 'Courses',
-              'status' => 1
-            ],
-            3 => [
-              'id' => 3,
-              'name' => 'O\'clock',
-              'status' => 1
-            ],
-            4 => [
-              'id' => 4,
-              'name' => 'Titre Professionnel',
-              'status' => 1
-            ]
-          ];
+        // on demande au modèle de récupérer toutes les catégories
+        $categoriesList = Category::all();
 
-          return response()->json($categoriesList);
+        // on retourne la réponse encodée en json
+        return $this->sendJsonResponse($categoriesList);
+
     }
 
-    public function item($categoryId)
+    /**
+     * Détail d'une catégorie
+     */
+    public function item($id)
     {
-        $categoryId = intval($categoryId);
+        $category = Category::find($id);
 
-        $categoriesList = [
-            1 => [
-              'id' => 1,
-              'name' => 'Chemin vers O\'clock',
-              'status' => 1
-            ],
-            2 => [
-              'id' => 2,
-              'name' => 'Courses',
-              'status' => 1
-            ],
-            3 => [
-              'id' => 3,
-              'name' => 'O\'clock',
-              'status' => 1
-            ],
-            4 => [
-              'id' => 4,
-              'name' => 'Titre Professionnel',
-              'status' => 1
-            ]
-          ];
 
-          if(array_key_exists($categoryId, $categoriesList)){
-            $category = $categoriesList[$categoryId];
-            return response()->json($category);
-        } else {
-            // J'affiche une 404
-            abort(404);
+        // si une catégorie avec cet id existe
+        if($category){
+            // on retourne une réponse contenant la catégorie encodée
+            // au format json
+            return $this->sendJsonResponse($category);
+        } else{
+            // sinon, on retourne une réponse vide avec un code 404
+            return $this->sendEmptyResponse(404);
         }
+
     }
 
-    //
 }
