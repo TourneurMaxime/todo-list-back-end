@@ -44,24 +44,47 @@ class CategoryController extends Controller
 
     public function add(Request $request)
     {
-        $category = new Category;
+        $categoryAdd = new Category;
+        $categoryAdd->name = $request->name;
+        $categoryAdd->status = $request->status;
 
-        $category->name = $request->name;
-        //$category->completion = $request->completion;
-        $category->status = $request->status;
-        //$category->created_at = $request->created_at;
-        //$category->updated_at = $request->updated_at;
-        //$category->category_id = $request->category_id;
-
-        $category->save();
+        $categoryAdd->save();
 
 
-        if($category){
-            // on retourne une réponse contenant la catégorie encodée
-            // au format json
-            return $this->sendJsonResponse($category, 201);
+        if($categoryAdd){
+            return $this->sendJsonResponse($categoryAdd, 201);
         } else{
-            // sinon, on retourne une réponse vide avec un code 404
+            return $this->sendEmptyResponse(500);
+        }
+
+        if(!$categoryAdd){
+            return $this->sendEmptyResponse(404);
+        }
+
+    }
+
+    public function update(Request $request, $id)
+    {
+
+        $categoryUpdate = Category::find($id);
+        //dd($categoryUpdate->getAttributes());
+        if($request->isMethod('patch')){
+            if($categoryUpdate->getAttributes() == $request->getContent())
+            //$categoryUpdate->only($request->getContent());
+            $categoryUpdate->update($request->getContent());
+        }
+
+        if ($request->isMethod('put')) {
+            $categoryUpdate->name = $request->name;
+            $categoryUpdate->status = $request->status;
+            $categoryUpdate->save();
+        }
+
+
+
+        if($categoryUpdate){
+            return $this->sendJsonResponse($categoryUpdate, 201);
+        } else{
             return $this->sendEmptyResponse(500);
         }
 

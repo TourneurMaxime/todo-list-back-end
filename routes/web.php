@@ -39,7 +39,23 @@ $router->post(
     '/categories',
     [
         'uses' => 'CategoryController@add',
-        'as' => 'category-list-post'
+        'as' => 'category-post'
+    ]
+);
+
+$router->put(
+    '/categories/{id}',
+    [
+        'uses' => 'CategoryController@update',
+        'as' => 'category-put'
+    ]
+);
+
+$router->patch(
+    '/categories/{id}',
+    [
+        'uses' => 'CategoryController@update',
+        'as' => 'category-patch'
     ]
 );
 
@@ -63,7 +79,15 @@ $router->post(
     '/tasks',
     [
         'uses' => 'TaskController@add',
-        'as' => 'task-list-post'
+        'as' => 'task-post'
+    ]
+);
+
+$router->put(
+    '/tasks/{id}',
+    [
+        'uses' => 'TaskController@update',
+        'as' => 'task-put'
     ]
 );
 

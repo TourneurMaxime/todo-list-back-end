@@ -45,13 +45,11 @@ class TaskController extends Controller
     public function add(Request $request)
     {
         $taskAdd = new Task;
-
+        
         $taskAdd->title = $request->title;
         $taskAdd->completion = $request->completion;
         $taskAdd->status = $request->status;
-        $taskAdd->created_at = $request->created_at;
-        $taskAdd->updated_at = $request->updated_at;
-        $taskAdd->category_id = $request->category_id;
+        $taskAdd->category_id = $request->categoryId;
 
         $taskAdd->save();
 
@@ -67,6 +65,27 @@ class TaskController extends Controller
 
     }
 
+    public function update(Request $request, $id)
+    {
+        $taskUpdate = Task::find($id);
+
+        $taskUpdate->title = $request->title;
+        $taskUpdate->completion = $request->completion;
+        $taskUpdate->status = $request->status;
+        $taskUpdate->category_id = $request->categoryId;
+
+        $taskUpdate->save();
+
+        if($taskUpdate){
+            // on retourne une réponse contenant la catégorie encodée
+            // au format json
+            return $this->sendJsonResponse($taskUpdate, 201);
+        } else{
+            // sinon, on retourne une réponse vide avec un code 404
+            return $this->sendEmptyResponse(500);
+        }
+
+    }
 
 
 }
