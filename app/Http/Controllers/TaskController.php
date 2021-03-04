@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class TaskController extends Controller
 {
     /**
      * Liste des catégories
@@ -15,10 +15,10 @@ class CategoryController extends Controller
     public function list()
     {
         // on demande au modèle de récupérer toutes les catégories
-        $categoriesList = Category::all();
+        $tasksList = Task::all();
 
         // on retourne la réponse encodée en json
-        return $this->sendJsonResponse($categoriesList);
+        return $this->sendJsonResponse($tasksList);
 
     }
 
@@ -27,14 +27,14 @@ class CategoryController extends Controller
      */
     public function item($id)
     {
-        $category = Category::find($id);
+        $task = Task::find($id);
 
 
         // si une catégorie avec cet id existe
-        if($category){
+        if($task){
             // on retourne une réponse contenant la catégorie encodée
             // au format json
-            return $this->sendJsonResponse($category);
+            return $this->sendJsonResponse($task);
         } else{
             // sinon, on retourne une réponse vide avec un code 404
             return $this->sendEmptyResponse(404);
@@ -44,26 +44,29 @@ class CategoryController extends Controller
 
     public function add(Request $request)
     {
-        $category = new Category;
+        $taskAdd = new Task;
 
-        $category->name = $request->name;
-        //$category->completion = $request->completion;
-        $category->status = $request->status;
-        //$category->created_at = $request->created_at;
-        //$category->updated_at = $request->updated_at;
-        //$category->category_id = $request->category_id;
+        $taskAdd->title = $request->title;
+        $taskAdd->completion = $request->completion;
+        $taskAdd->status = $request->status;
+        $taskAdd->created_at = $request->created_at;
+        $taskAdd->updated_at = $request->updated_at;
+        $taskAdd->category_id = $request->category_id;
 
-        $category->save();
+        $taskAdd->save();
 
 
-        if($category){
+        if($taskAdd){
             // on retourne une réponse contenant la catégorie encodée
             // au format json
-            return $this->sendJsonResponse($category, 201);
+            return $this->sendJsonResponse($taskAdd, 201);
         } else{
             // sinon, on retourne une réponse vide avec un code 404
             return $this->sendEmptyResponse(500);
         }
 
     }
+
+
+
 }

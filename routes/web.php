@@ -34,3 +34,36 @@ $router->get(
         'as' => 'category-item'
     ]
 );
+
+$router->post(
+    '/categories',
+    [
+        'uses' => 'CategoryController@add',
+        'as' => 'category-list-post'
+    ]
+);
+
+$router->get(
+    '/tasks',
+    [
+        'uses' => 'TaskController@list',
+        'as' => 'task-list'
+    ]
+);
+
+$router->get(
+    '/tasks/{id}',
+    [
+        'uses' => 'TaskController@item',
+        'as' => 'task-item'
+    ]
+);
+
+$router->post(
+    '/tasks',
+    [
+        'uses' => 'TaskController@add',
+        'as' => 'task-list-post'
+    ]
+);
+
