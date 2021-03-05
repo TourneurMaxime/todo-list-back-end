@@ -63,6 +63,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $categoryUpdate = Category::find($id);
+        //dd($categoryUpdate->getAttributes());
         if ($request->isMethod('patch')) {
             foreach ($categoryUpdate->getAttributes() as $key => $value) {
                 if ($request->has($key)) {
@@ -78,10 +79,11 @@ class CategoryController extends Controller
             }
 
 
+
             if ($categoryUpdate) {
                 return $this->sendJsonResponse($categoryUpdate, 201);
             } else {
-                return $this->sendEmptyResponse(400);
+                return $this->sendEmptyResponse(500);
             }
         }
     }
