@@ -60,29 +60,30 @@ class CategoryController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $categoryUpdate = Category::find($id);
-        if ($request->isMethod('patch')) {
-            foreach ($categoryUpdate->getAttributes() as $key => $value) {
+        if ($categoryUpdate) {
+            if ($request->isMethod('patch')){
+                foreach ($categoryUpdate->getAttributes() as $key => $value){
                 if ($request->has($key)) {
                     $categoryUpdate->$key = $request->$key;
-                    $categoryUpdate->save();
+                    break;
+                 }
                 }
-            }
-
-            if ($request->isMethod('put')) {
-                $categoryUpdate->name = $request->name;
-                $categoryUpdate->status = $request->status;
-                $categoryUpdate->save();
-            }
-
-
-            if ($categoryUpdate) {
-                return $this->sendJsonResponse($categoryUpdate, 201);
             } else {
-                return $this->sendEmptyResponse(400);
+                $categoryUpdate->title = $request->title;
+                $categoryUpdate->completion = $request->completion;
+                $categoryUpdate->status = $request->status;
+                $categoryUpdate->category_id = $request->categoryId;
             }
+            $categoryUpdate->save();
+            if ($categoryUpdate) {
+                return $this->sendJsonResponse($categoryUpdate, 200);
+            } else {
+                return $this->sendEmptyResponse(500);
+            }
+        } else {
+            return $this->sendEmptyResponse(404);
         }
     }
 }
