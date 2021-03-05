@@ -72,7 +72,6 @@ class TaskController extends Controller
                 foreach ($taskUpdate->getAttributes() as $key => $value){
                 if ($request->has($key)) {
                     $taskUpdate->$key = $request->$key;
-                    break;
                  }
                 }
             } else {

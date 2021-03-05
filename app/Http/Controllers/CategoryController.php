@@ -67,7 +67,6 @@ class CategoryController extends Controller
                 foreach ($categoryUpdate->getAttributes() as $key => $value){
                 if ($request->has($key)) {
                     $categoryUpdate->$key = $request->$key;
-                    break;
                  }
                 }
             } else {
