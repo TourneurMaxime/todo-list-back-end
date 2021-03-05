@@ -83,7 +83,7 @@ class CategoryController extends Controller
                 return $this->sendEmptyResponse(500);
             }
         } else {
-            return $this->sendEmptyResponse(404);
+            return $this->sendEmptyResponse(400);
         }
     }
 }

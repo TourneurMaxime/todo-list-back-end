@@ -10,7 +10,7 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-
+//=====================MAIN======================
 $router->get(
     '/',
     [
@@ -18,6 +18,9 @@ $router->get(
         'as'   => 'main-home'
     ]
 );
+
+
+//===================CATEGORY====================
 
 $router->get(
     '/categories',
@@ -58,6 +61,9 @@ $router->patch(
         'as' => 'category-patch'
     ]
 );
+
+
+//====================TASK======================
 
 $router->get(
     '/tasks',
