@@ -205,18 +205,21 @@ class TaskController extends Controller
 
     // il manquera la gestion du routage
     // il nous faut un id pour savoir quelle tache supprimer ! TO DO
-    public function delete(){
-
+    public function delete($id){
         // on essaie de trouver la tache en question
+        $taskToDelete = Task::find($id);
+
 
         // si elle existe :
+        if ($taskToDelete) {
 
             // on la supprime
-
+            $taskToDelete->delete();
             // on indique à l'utilisateur que tout s'est bien passé
-
-        // sinon
-
-            // on indique à l'utilisateur que la tache n'a pas été trouvée
+            return $this->sendEmptyResponse(204);
+            // sinon
+        } else {
+            return $this->sendEmptyResponse(404);
+        }
     }
 };
