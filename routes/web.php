@@ -10,7 +10,7 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-//=====================MAIN======================
+
 $router->get(
     '/',
     [
@@ -19,89 +19,71 @@ $router->get(
     ]
 );
 
-
-//===================CATEGORY====================
-
+// on ajoute la route pour la liste des catégories
 $router->get(
     '/categories',
     [
         'uses' => 'CategoryController@list',
-        'as' => 'category-list'
+        'as'   => 'categories-list'
     ]
 );
 
+// on ajoute la liste de détail d'une catégorie
+// cette route a un paramètre obligatoire : id
+// cet id pourra être récupéré en poaramètre de la méthode de controller
 $router->get(
     '/categories/{id}',
     [
         'uses' => 'CategoryController@item',
-        'as' => 'category-item'
+        'as'   => 'categories-item'
     ]
 );
 
-$router->post(
-    '/categories',
-    [
-        'uses' => 'CategoryController@add',
-        'as' => 'category-post'
-    ]
-);
-
-$router->put(
-    '/categories/{id}',
-    [
-        'uses' => 'CategoryController@update',
-        'as' => 'category-put'
-    ]
-);
-
-$router->patch(
-    '/categories/{id}',
-    [
-        'uses' => 'CategoryController@update',
-        'as' => 'category-patch'
-    ]
-);
-
-
-//====================TASK======================
-
+// on définit la route pour le endpoint /tasks en GET
+// c'est la méthode list du controller TaskController
+// qui traitera les requêtes sur ce endpoint
 $router->get(
     '/tasks',
     [
         'uses' => 'TaskController@list',
-        'as' => 'task-list'
-    ]
+        'as' => 'tasks-list'
+    ],
 );
 
+// on définit la route pour le endpoint /tasks/[id] en GET
+// c'est la méthode item du controller TaskController
+// qui traitera les requêtes sur ce endpoint
 $router->get(
     '/tasks/{id}',
     [
         'uses' => 'TaskController@item',
-        'as' => 'task-item'
-    ]
+        'as' => 'tasks-item'
+    ],
 );
 
+// on définit la route pour le endpoint /tasks en POST
+// c'est la méthode create du controller TaskController
+// qui traitera les requêtes sur ce endpoint
 $router->post(
     '/tasks',
     [
-        'uses' => 'TaskController@add',
-        'as' => 'task-post'
-    ]
+        'uses' => 'TaskController@create',
+        'as' => 'tasks-create'
+    ],
 );
 
 $router->put(
     '/tasks/{id}',
     [
-        'uses' => 'TaskController@update',
-        'as' => 'task-put'
-    ]
+        'uses' => 'TaskController@updateTotal',
+        'as' => 'tasks-put',
+    ],
 );
 
 $router->patch(
     '/tasks/{id}',
     [
-        'uses' => 'TaskController@update',
-        'as' => 'task-patch'
-    ]
+        'uses' => 'TaskController@updatePartial',
+        'as' => 'tasks-patch',
+    ],
 );
-

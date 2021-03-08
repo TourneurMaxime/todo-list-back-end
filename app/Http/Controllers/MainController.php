@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Task;
 use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
@@ -65,6 +66,25 @@ class MainController extends Controller
         /*
         Category::destroy(6);
         */
+
+
+        $task = Task::find(1);
+
+        echo $task->title;
+
+        //dump($task->category);
+
+        // maintenant, grâce à la définition des relations
+        // dans le modèle, on accède directement à l'entité associée
+        // grâce à une propriété dynamique. magique !
+        echo $task->category->name;
+
+
+        // ça marche aussi dans l'autre sens
+        // depuis une catégorie, on peut accéder à la liste des taches associées
+        dump($courseCategory->tasks);
+
+        // on pourrait imaginer une boucle de parcours, etc.
     }
 
 }

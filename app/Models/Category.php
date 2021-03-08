@@ -13,5 +13,11 @@ use Illuminate\Database\Eloquent\Model;
 // - il faut également avoir 2 champs created_at et updated_at de type timestamp
 class Category extends Model
 {
-    //
+    // Ici on a défini qu'une category pouvait ête liée à plusieurs taches
+    public function tasks(){
+        // l'un ou l'autre fonctionne :
+        //return $this->hasMany('App\Models\Task');
+        return  $this->hasMany(Task::class);
+
+    }
 }
