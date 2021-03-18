@@ -28,14 +28,9 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
 
-
-        // si une catégorie avec cet id existe
         if($category){
-            // on retourne une réponse contenant la catégorie encodée
-            // au format json
             return $this->sendJsonResponse($category);
         } else{
-            // sinon, on retourne une réponse vide avec un code 404
             return $this->sendEmptyResponse(404);
         }
 

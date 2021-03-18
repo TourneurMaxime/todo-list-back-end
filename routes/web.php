@@ -19,7 +19,6 @@ $router->get(
     ]
 );
 
-// on ajoute la route pour la liste des catégories
 $router->get(
     '/categories',
     [
@@ -28,9 +27,6 @@ $router->get(
     ]
 );
 
-// on ajoute la liste de détail d'une catégorie
-// cette route a un paramètre obligatoire : id
-// cet id pourra être récupéré en poaramètre de la méthode de controller
 $router->get(
     '/categories/{id}',
     [
@@ -39,9 +35,6 @@ $router->get(
     ]
 );
 
-// on définit la route pour le endpoint /tasks en GET
-// c'est la méthode list du controller TaskController
-// qui traitera les requêtes sur ce endpoint
 $router->get(
     '/tasks',
     [
@@ -50,9 +43,6 @@ $router->get(
     ],
 );
 
-// on définit la route pour le endpoint /tasks/[id] en GET
-// c'est la méthode item du controller TaskController
-// qui traitera les requêtes sur ce endpoint
 $router->get(
     '/tasks/{id}',
     [
@@ -61,9 +51,6 @@ $router->get(
     ],
 );
 
-// on définit la route pour le endpoint /tasks en POST
-// c'est la méthode create du controller TaskController
-// qui traitera les requêtes sur ce endpoint
 $router->post(
     '/tasks',
     [
